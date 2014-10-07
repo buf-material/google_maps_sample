@@ -1,0 +1,43 @@
+<h1>位置情報を検索してみよう</h1>
+
+<div class="col-md-6">
+  <%= form_tag place_list_path, :role =>"form", :method => :get do %>
+    <div class="form-group">
+      <%= text_field_tag :search, params[:search], { :class => "form-control", :required => true, } %>
+      <%= button_tag( {:type => "submit", :name => nil, :class => "btn btn-default" } ) do %>
+        <span class="glyphicon glyphicon-search">キーワード検索</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="col-md-12">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Address</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @places.each do |place| %>
+        <tr>
+          <td><%= place.name %></td>
+          <td><%= place.latitude %></td>
+          <td><%= place.longitude %></td>
+          <td><%= place.address %></td>
+          <td><%= link_to ( place ), :title => "show" do %>
+            <span class="glyphicon glyphicon-stats"></span>
+          <% end %></td>
+          <td><%= link_to( place, method: :delete, data: { confirm: "#{place.name} の位置情報を削除します" }, :title => "delete" ) do %>
+            <span class="glyphicon glyphicon-trash"></span>
+          <% end %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

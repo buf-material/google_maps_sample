@@ -1,0 +1,36 @@
+<h1>希望の場所は見つかったかな?</h1>
+
+<div class="col-md-12">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Address</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @places.each do |place| %>
+        <tr>
+          <td><%= place.name %></td>
+          <td><%= place.lat %></td>
+          <td><%= place.lng %></td>
+          <td><%= place.formatted_address %></td>
+          <td><%= link_to( '登録', place_index_path( :place => { :name      => place.name,
+                                                                 :latitude  => place.lat,
+                                                                 :longitude => place.lng,
+                                                                 :address   => place.formatted_address, } ),:method => 'post' ) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <button type="button" class="btn pull-right btn-lg btn-default">
+    <%= link_to 'Back', place_index_path %>
+  </button>
+
+</div>
